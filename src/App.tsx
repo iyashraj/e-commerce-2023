@@ -1,8 +1,14 @@
 import './App.css';
-import { useRoutes, Outlet } from 'react-router-dom';
+import { useRoutes, Outlet, Router, BrowserRouter } from 'react-router-dom';
+import { Routes } from './routes/route';
 
 function App() {
-  return useRoutes(Route)
+  return (
+    <BrowserRouter>
+    <h1>Welcome to e-yug</h1>
+    <Routes />
+    </BrowserRouter>
+  )
 }
 
 export default App

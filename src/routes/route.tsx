@@ -1,32 +1,23 @@
-import HomeMain from "../pages/home/index";
+import { useRoutes } from "react-router-dom";
+import HomeMain from "../pages/home";
 import Login from "../pages/auth-login/login";
 import SignUp from "../pages/auth-login/signup";
-import ErrorPage from '../components/404';
+import Navbar from "../components/home/navbar";
+import ErrorPage from "../components/404";
+import ProtectedRoute from "./protectedRoute";
+export function Routes() {
+    const element = useRoutes([
+      { path: "/", element: <HomeMain/> },
+      { path: "/login",
+        element: <Login/>,
+        children: [
+          { index: true, element: <SignUp/> },
+          { path: ":slug", element: <Login/> }
+        ],
+      },
+      { path: "/nav", element: <Navbar/> },
+      { path: "*", element: <ProtectedRoute user={false}><ErrorPage/></ProtectedRoute>}
+    ]);
+    return element;
+  }
 
-export default [
-  {
-    path: "/",
-    element: <HomeMain />,
-    children: [
-      { index: true, element: <HomeMain /> },
-      {
-        path: "/login",
-        element: <Login />,
-        RouteName: "Login",
-        protected: false,
-      },
-      {
-        path: "/register",
-        element: <SignUp />,
-        RouteName: "Register",
-        protected: false,
-      },
-      {
-        path: "/errorpage",
-        element: <RequireAuth><ErrorPage/></RequireAuth>,
-        RouteName: "ErrorPage",
-        protected: true,
-      },
-    ],
-  },
-];
