@@ -5,7 +5,6 @@ import { Routes } from './routes/route';
 function App() {
   return (
     <BrowserRouter>
-    <h1>Welcome to e-yug</h1>
     <Routes />
     </BrowserRouter>
   )
