@@ -1,8 +1,11 @@
 import React from 'react'
+import StickyBar from '../../components/home/stickyBar'
 
 const HomeMain = () => {
   return (
-    <div>HomeMain</div>
+    <div>
+      <StickyBar />
+    </div>
   )
 }
 
