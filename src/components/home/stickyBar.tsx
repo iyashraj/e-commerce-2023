@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { useEffect, useState } from "react";
 import {
   AiFillInstagram,
   AiFillFacebook,
@@ -7,11 +8,12 @@ import {
 } from "react-icons/ai";
 
 const StickyBar = () => {
+  const [display, setDisplay] = useState(true);
   const StickyMain = styled.div`
-    display: flex;
+    display: ${display ? "flex" : "none"};
     width: 100%;
     justify-content: space-between;
-    padding: 1% 5%;
+    padding: 0.5% 5%;
     font-family: cursive;
     background: #181818;
     color: #d3cfcf;
@@ -45,6 +47,12 @@ const StickyBar = () => {
       align-items: center;
     }
   `;
+  useEffect(() => {
+    setTimeout(() => {
+      setDisplay(false);
+    }, 15000);
+  }, []);
+
   return (
     <StickyMain>
       <div>
@@ -61,8 +69,10 @@ const StickyBar = () => {
         <a href="https://github.com/iyashraj/" target="_blank">
           <AiFillGithub />
         </a>{" "}
-        <a href="#" target="_blank">
-          <AiFillLinkedin className="linkedin-icon" />
+        <a
+          href="https://www.linkedin.com/in/yash-raj-06710020a/"
+          target="_blank">
+          <AiFillLinkedin />
         </a>
       </IconWrapper>
     </StickyMain>
