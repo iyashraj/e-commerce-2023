@@ -6,7 +6,7 @@ import HeroSection from "../../components/home/heroSection";
 const HomeMain = () => {
   return (
     <div>
-      <div style={{position:"fixed", width:"100%", top:"0"}}>
+      <div style={{position:"fixed", width:"100%", top:"0", background:"#fdf9f9"}}>
         <StickyBar />
         <Navbar />
       </div>
