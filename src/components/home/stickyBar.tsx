@@ -7,7 +7,11 @@ import {
   AiFillLinkedin,
 } from "react-icons/ai";
 
-const StickyBar = () => {
+interface IWidgets{
+  widgets : boolean
+}
+
+const StickyBar = ({widgets} : IWidgets) => {
   const [display, setDisplay] = useState(true);
   const StickyMain = styled.div`
     display: ${display ? "flex" : "none"};
@@ -48,9 +52,13 @@ const StickyBar = () => {
     }
   `;
   useEffect(() => {
-    setTimeout(() => {
-      setDisplay(false);
-    }, 15000);
+    if(!widgets){
+      setDisplay(true);
+    }else{
+      setTimeout(() => {
+        setDisplay(false);
+      }, 1500);
+    }
   }, []);
 
   return (

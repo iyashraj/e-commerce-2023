@@ -7,7 +7,7 @@ const HomeMain = () => {
   return (
     <div>
       <div style={{position:"fixed", width:"100%", top:"0", background:"#fdf9f9"}}>
-        <StickyBar />
+        <StickyBar widgets={true}/>
         <Navbar />
       </div>
       <HeroSection />{" "}

@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle  } from 'styled-components';
+import StickyBar from './home/stickyBar';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
@@ -170,6 +171,7 @@ const CopyrightIcon = styled.i`
       <>
         <GlobalStyle />
         <Container>
+          <StickyBar widgets={false}/>
           <Header>
             <HeadText>
               <p>404 Not Found</p>
@@ -191,7 +193,7 @@ const CopyrightIcon = styled.i`
           </Main>
           <Footer>
             <p>
-              <CopyrightIcon className="far fa-copyright" /> natoku
+              <CopyrightIcon className="far fa-copyright" /> All rights reserved to e-yug corporation.
             </p>
           </Footer>
         </Container>
