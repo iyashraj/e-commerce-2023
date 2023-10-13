@@ -57,7 +57,7 @@ const StickyBar = ({widgets} : IWidgets) => {
     }else{
       setTimeout(() => {
         setDisplay(false);
-      }, 1500);
+      }, 15000);
     }
   }, []);
 
