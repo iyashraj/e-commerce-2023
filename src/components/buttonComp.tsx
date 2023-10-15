@@ -7,9 +7,6 @@ export interface IProps {
   className?: string;
 }
 
-const ButtonComp = (props: IProps) => {
-  const { btnText, className, onClick } = props;
-
   const ButtonMain = styled.button`
     background-color: #ffffff;
     border: 1px solid #222222;
@@ -50,6 +47,9 @@ const ButtonComp = (props: IProps) => {
       opacity: 1;
     };
   `;
+
+const ButtonComp = (props: IProps) => {
+  const { btnText, className, onClick } = props;
   return (
     <ButtonMain onClick={onClick} className={`${className}`}>
       {btnText}

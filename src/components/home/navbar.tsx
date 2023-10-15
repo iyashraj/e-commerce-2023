@@ -1,10 +1,12 @@
-import React,{useEffect} from "react";
 import { styled } from "styled-components";
 import LogoImg from "../../assets/e_yug_logo.png";
 import ButtonComp from "../buttonComp";
 import { useNavigate } from "react-router-dom";
 
 const NavMain = styled.div`
+position: absolute;
+width: 100%;
+background: aliceblue;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,7 +66,7 @@ const Navbar = () => {
           <li>FAQ</li>
         </ul>
         <ButtonComp btnText="Login" onClick={()=> navigate("/login")}/>
-        <ButtonComp btnText="Register" />
+        <ButtonComp btnText="Register" onClick={()=> navigate("/signup")}/>
       </RightDiv>
     </NavMain>
   );
