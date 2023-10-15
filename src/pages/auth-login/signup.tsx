@@ -1,10 +1,16 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // Import necessary icons
 import { AiFillFacebook, AiFillGithub } from 'react-icons/ai';
-import {  FaUserCircle } from 'react-icons/fa';
 import {  FcGoogle } from 'react-icons/fc';
+import Navbar from '../../components/home/navbar';
+import { createUserWithEmailAndPassword } from 'firebase/auth/cordova';
+import  { auth, db } from '../../firebase/firestoreServiceWorkers';
+import { collection, addDoc, doc, setDoc, getDocs } from 'firebase/firestore';
+import { Toaster } from 'react-hot-toast';
+import UserDataService from '../../firebase/users.services'
+import toast from 'react-hot-toast/headless';
 
 const MainSection = styled.div`
   width: 100%;
@@ -153,6 +159,8 @@ function Signup() {
   // Handle form submission
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    console.log(formData,"formdata")
+    register({email :formData.email, password:formData.password, name: formData.name,mobile: formData.phone})
     // Perform form validation and submission here
   };
 
@@ -165,7 +173,103 @@ function Signup() {
     });
   };
 
+  interface IRegisterProps {
+    email: string,
+    password: string,
+    name: string,
+    mobile: string
+  }
+
+  const register = async ({email, password, name, mobile}: IRegisterProps) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const { uid } = userCredential.user;
+      const newUser = {
+        uid: uid,
+        name: name,
+        email: email,
+        mobile: mobile,
+      };
+      UserDataService.addUsers(newUser)
+      .then(() => {
+        toast.success("User added successfully.")
+      })
+      .catch((error) => {
+        // Handle the error
+        console.error("Error adding user:", error);
+        toast.error("Error adding user.")
+      });
+      console.log('User registered successfully');
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
+  };
+
+  const getAllUsers = () => {
+    UserDataService.getAllUsers()
+  .then((querySnapshot) => {
+    const users = [];
+    querySnapshot.forEach((doc) => {
+      users.push(doc.data());
+    });
+    console.log("All users:", users);
+  })
+  .catch((error) => {
+    // Handle the error
+    console.error("Error fetching users:", error);
+  });
+  }
+
+  const getUserByID = (userId:string) => {
+    UserDataService.getUser(userId)
+  .then((docSnapshot) => {
+    if (docSnapshot.exists()) {
+      const userData = docSnapshot.data();
+      console.log("User data:", userData);
+    } else {
+      console.log("User not found.");
+    }
+  })
+  .catch((error) => {
+    // Handle the error
+    console.error("Error fetching user:", error);
+  });
+  }
+
+  const deleteUserByID = (userId:string) => {
+    UserDataService.deleteUser(userId)
+    .then(() => {
+      // User deleted successfully
+      console.log("User deleted successfully.");
+    })
+    .catch((error) => {
+      // Handle the error
+      console.error("Error deleting user:", error);
+    });
+  }
+
+  const updateUser = (userId:string, updatedUserData:IRegisterProps) => {
+    UserDataService.updateUser(userId, updatedUserData)
+    .then(() => {
+      // User data updated successfully
+      console.log("User data updated successfully.");
+    })
+    .catch((error) => {
+      // Handle the error
+      console.error("Error updating user data:", error);
+    });
+  }
+  useEffect(()=>{
+    getAllUsers()
+  },[])
+
   return (
+    <>
+    <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
+      <Navbar />
     <MainSection>
       <MainCard>
         <CardHeader>
@@ -231,6 +335,8 @@ function Signup() {
         </SocialAuthWrapper>
       </MainCard>
     </MainSection>
+    
+</>
   );
 }
 
