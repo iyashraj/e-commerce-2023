@@ -8,6 +8,7 @@ import ProtectedRoute from "./protectedRoute";
 export function Routes() {
     const element = useRoutes([
       { path: "/", element: <HomeMain/> },
+      { path: "/signup", element: <SignUp/> },
       { path: "/login",
         element: <Login/>,
         children: [

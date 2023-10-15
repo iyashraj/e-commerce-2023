@@ -1,5 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import {
+  AiFillFacebook,
+  AiFillGithub,
+} from "react-icons/ai";
+import {FcGoogle} from 'react-icons/fc'
+import {FaUserCircle} from 'react-icons/fa'
 
 const MainSection = styled.div`
   width: 100%;
@@ -26,7 +32,7 @@ const MainCard = styled.div`
   align-items: center;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   flex-direction: column;
-  gap: 40px;
+  gap: 15px;
   padding-top: 20px;
 `;
 
@@ -109,6 +115,27 @@ const LoginButton = styled.button`
   cursor: pointer;
 `;
 
+const AuthButtonIcons = styled.div`
+display: flex;
+gap: 15px;
+margin-bottom: 20px;
+svg {
+      height: 30px;
+      width: 30px;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+`
+const SocialAuthWrapper = styled.div`
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  span{
+    font-size: 12px;
+  }
+`;
 
 
 function LoginForm() {
@@ -129,9 +156,10 @@ function LoginForm() {
         <ForgotDiv>Forgot Password?</ForgotDiv>
         <LoginButton>Login</LoginButton>
         </InputsWrapper>
-        <div>Or Sign Up Using</div>
-        <div><div>Logo 1</div><div>Logo 1</div><div>Logo 1</div></div>
-        <div>Sign Up</div>
+        <SocialAuthWrapper>
+        <span>Or Sign Up Using</span>
+        <AuthButtonIcons><AiFillFacebook/><FcGoogle/><AiFillGithub/><FaUserCircle/></AuthButtonIcons>
+        </SocialAuthWrapper>
       </MainCard>
     </MainSection>
   );
