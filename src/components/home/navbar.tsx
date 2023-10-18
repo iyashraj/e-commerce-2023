@@ -53,7 +53,7 @@ const Navbar = () => {
   const navigate = useNavigate()
   return (
     <NavMain>
-      <LeftDiv>
+      <LeftDiv onClick={()=> navigate("/")}>
         <img src={LogoImg} />
         <span>e-Yug</span>
       </LeftDiv>

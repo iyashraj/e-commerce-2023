@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle  } from 'styled-components';
 import StickyBar from './home/stickyBar';
+import { useNavigate } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
@@ -167,6 +168,7 @@ const CopyrightIcon = styled.i`
 `;
 
   const ErrorPage: React.FC = () => {
+    const navigate = useNavigate()
     return (
       <>
         <GlobalStyle />
@@ -186,7 +188,7 @@ const CopyrightIcon = styled.i`
                 <H2>I have bad news for you</H2>
                 <P>The page you are looking for might be removed or is temporarily unavailable.</P>
                 <span className="input-group-btn">
-                  <Button type="button">Back to homepage</Button>
+                  <Button onClick={()=> navigate("/login")} type="button">Back to homepage</Button>
                 </span>
               </ErrorText>
             </MainWrapper>
